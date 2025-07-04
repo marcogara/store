@@ -15,8 +15,8 @@ public class ProductController {
     public String productsPage(Model model) {
         List<Product> products = Arrays.asList(
                 new Product("Notebook", 9.99, "A ruled notebook"),
-                new Product("Notebook", 9.99, "A ruled notebook"),
-                new Product("Notebook", 9.99, "A ruled notebook")
+                new Product("Pen", 1.99, "A blue ink ballpoint pen"),
+                new Product("Backpack", 29.99, "Lightweight school backpack")
         );
 
         model.addAttribute("products", products);
