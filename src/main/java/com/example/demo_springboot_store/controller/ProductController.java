@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,14 @@ public class ProductController {
     @PostMapping("/products")
     public String submitProduct(@ModelAttribute Product product) {
         products.add(product);
+        return "redirect:/products";
+    }
+
+    @PostMapping("/products/delete")
+    public String deleteProduct(@RequestParam int index) {
+        if (index >= 0 && index < products.size()) {
+            products.remove(index);
+        }
         return "redirect:/products";
     }
 }

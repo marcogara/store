@@ -6,12 +6,20 @@
 <body>
 <h1>Our Products</h1>
 <ul>
-  <li th:each="product : ${products}">
-    <strong th:text="${product.name}">Product Name</strong> -
-    <span th:text="${product.price}">Price</span><br>
-    <em th:text="${product.description}">Description</em>
+  <li th:each="product, iterStat : ${products}">
+    <div>
+      <strong th:text="${product.name}">Product Name</strong> -
+      <span th:text="${product.price}">Price</span><br>
+      <em th:text="${product.description}">Description</em>
+    </div>
+
+    <form th:action="@{/products/delete}" method="post" style="margin-top: 5px;">
+      <input type="hidden" name="index" th:value="${iterStat.index}" />
+      <button type="submit">Delete</button>
+    </form>
   </li>
 </ul>
+
 <p><a href="/products/new">Add a Product</a></p>
 </body>
 </html>
