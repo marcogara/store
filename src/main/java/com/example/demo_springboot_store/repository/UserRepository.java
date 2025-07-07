@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
 
-        private final JdbcTemplate jdbc;
+    private final JdbcTemplate jdbc;
 
-        public UserRepository(JdbcTemplate jdbc) {
-            this.jdbc = jdbc;
-        }
+    public UserRepository(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
 
     public User findByUsername(String username) {
         String sql = "SELECT * FROM users WHERE username = ?";
@@ -22,5 +22,11 @@ public class UserRepository {
     public void save(User user) {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
         jdbc.update(sql, user.getUsername(), user.getPassword());
+    }
+
+    public boolean exists(String username) {
+        String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+        Integer count = jdbc.queryForObject(sql, Integer.class, username);
+        return count != null && count > 0;
     }
 }

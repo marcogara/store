@@ -47,9 +47,6 @@ public class HomeController {
         if (password != null && password.equals(user.getPassword()))  {
             session.setAttribute("user", user.getUsername()); // Store user in session
 
-            // ✅ Save user to database for test
-            userRepository.save(user);
-
             return "redirect:/dashboard"; // Redirect after successful login
         }
 
@@ -80,4 +77,15 @@ public class HomeController {
         return "register";
     }
 
+    @PostMapping("/register")
+    public String register(@ModelAttribute User user, Model model) {
+        if (userRepository.exists(user.getUsername())) {
+            model.addAttribute("error", "Username already exists.");
+            return "register";
+        }
+
+        userRepository.save(user);
+        model.addAttribute("success", "Account created successfully. Please log in.");
+        return "register";
+    }
 }
