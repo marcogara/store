@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Store</title>
@@ -7,6 +7,15 @@
 <body>
 <h1>Hello World</h1>
 <h1>Welcome to the Store</h1>
+<h2>Login in</h2>
+<form th:action="@{/login}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required />
+    <button type="submit">Login</button>
+</form>
 <p><a href="/products">View Products</a></p>
 </body>
 </html>
