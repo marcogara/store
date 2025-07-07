@@ -19,3 +19,11 @@ While most of the inheritance is fine, it also inherits unwanted elements like `
 To prevent this, the project POM contains empty overrides for these elements.
 If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
 
+### Possible TODO
+
+* Create a session timeout mechanism
+* Message for invalid credential
+* Create a fake user service
+* Adding Registration
+* AuthService
+* Admin Interface

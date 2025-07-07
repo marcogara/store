@@ -1,6 +1,7 @@
-package com.example.demo_springboot_store;
+package com.example.demo_springboot_store.controller;
 
 import com.example.demo_springboot_store.model.User;
+import com.example.demo_springboot_store.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,16 @@ import java.util.Map;
 
 @Controller
 public class HomeController {
+
+    private UserRepository userRepository;
+
+    public HomeController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Value("${spring.application.name}")
     private String appName;
+
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -37,6 +46,10 @@ public class HomeController {
         String password = users.get(user.getUsername());
         if (password != null && password.equals(user.getPassword()))  {
             session.setAttribute("user", user.getUsername()); // Store user in session
+
+            // ✅ Save user to database for test
+            userRepository.save(user);
+
             return "redirect:/dashboard"; // Redirect after successful login
         }
 
@@ -60,4 +73,11 @@ public class HomeController {
         session.invalidate(); // Destroys the session, logs the user out
         return "redirect:/";  // Redirect back to login page
     }
+
+    @GetMapping("/register")
+    public String showRegisterForm(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
 }
