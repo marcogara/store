@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
-import java.util.Map;
-
 @Controller
 public class HomeController {
 
@@ -37,13 +35,9 @@ public class HomeController {
                         HttpSession session,
                         Model model) {
 
-        // Hardcoded user list for now
-        Map<String, String> users = Map.of(
-                "admin", "password123",
-                "user", "userpass"
-        );
+        User user1 = userRepository.findByUsername(user.getUsername());
 
-        String password = users.get(user.getUsername());
+        String password = user1.getPassword();
         if (password != null && password.equals(user.getPassword()))  {
             session.setAttribute("user", user.getUsername()); // Store user in session
 

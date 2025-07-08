@@ -24,6 +24,15 @@ If you manually switch to a different parent and actually want the inheritance, 
 * Create a session timeout mechanism
 * Message for invalid credential
 * Create a fake user service
-* Adding Registration
+
 * AuthService
 * Admin Interface
+* Add password hashing (with BCrypt)
+
+* Automatically log the user in after registration
+
+* Add validation (e.g., min length, disallow empty, etc.)
+
+* Add user roles (admin/user)
+
+* Build the admin dashboard
